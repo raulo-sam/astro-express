@@ -2,21 +2,28 @@
 const pageTitle = "Home Page Astro props";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import "../styles/global.css";
-const { props } = Astro.locals as { props: {content: string } }
+const { folder } = Astro.locals as { folder: any }
+// console.log(folder['page01.md'])
+// const Content = folder['page01.md'].content
+// const path = '/pages/*.md'
+// const posts = await Astro.glob('../../pages/**/*.md');
 
-const posts = await Astro.glob('/pages/*.md');
-const Content = posts[0].Content
-const headings = posts[0].getHeadings()
-const fm = posts[0].frontmatter
+// const Content = posts[1].Content
+// const Contents = posts.map(item=> item.Content)
+// const headings = posts[0].getHeadings()
+// const fm = posts[0].frontmatter
 
-console.log(headings)
+console.log(folder)
 ---
 
 <BaseLayout pageTitle={pageTitle}>
     
-    <h1>{fm.title}</h1>
+    <!-- <h1>{fm.title}</h1> -->
     <!-- <h2>hola slot que tal</h2> -->
     <!-- {props?.content} -->
     <!-- {posts[0].file.toString()} -->
-    <Content>
+    <!-- <Content> -->
+        
+        {folder['intro\\intro.md']?.content}
+        {folder['intro\\\intro.md']?.content}
 </BaseLayout>

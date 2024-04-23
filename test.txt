@@ -1,0 +1,7 @@
+
+el servidor express server-ssr.js apunta al dist/server, este tiene habilitado un middleware
+que lee el archivo de configuracion y el contenido de los pages
+
+1. mirar astrojs/compiler
+
+

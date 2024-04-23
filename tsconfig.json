@@ -1,7 +1,19 @@
 {
   "extends": "astro/tsconfigs/strict",
+  // "include": [
+  //   "./src/**/*.ts",
+  //   "./src/**/*.d.ts",
+  //   "./src/**/*.astro",
+  // ],
+  // "exclude": ["node_modules", "build"],
   "compilerOptions": {
+    "noImplicitAny": false,
     "strictNullChecks": false,
-    "isolatedModules": false
+    "isolatedModules": false,
+    "baseUrl": ".",
+    "paths": {
+      "@UI/*": ["src/UI/*"]
+    }
+    
   }
 }
