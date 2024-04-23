@@ -26,7 +26,9 @@ app.use( async (req, res, next) => {
         files.forEach( async file => {
             await fs.promises.readFile(`pages/${file}`).then(data =>{
                 content = data.toString()
-                ssrHandler(req, res, next, {props: {content}})
+                if(ssrHandler) {
+                    ssrHandler(req, res, next, {props: {content}})
+                }
             })
         })
     })

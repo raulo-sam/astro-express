@@ -97,3 +97,25 @@ global store framwrowk agnostic
 
 ### https://homebrewery.naturalcrit.com/
 impresionnte editor de manual de instrucciones
+
+
+
+
+Task Lists
+Task lists (also referred to as checklists and todo lists) allow you to create a list of items with checkboxes. In Markdown applications that support task lists, checkboxes will be displayed next to the content. To create a task list, add dashes (-) and brackets with a space ([ ]) in front of task list items. To select a checkbox, add an x in between the brackets ([x]).
+
+- [x] Write the press release
+- [ ] Update the website
+- [ ] Contact the media
+
+
+Highlight
+This isn’t common, but some Markdown processors allow you to highlight text. The result looks like this. To highlight words, use two equal signs (==) before and after the words.
+
+I need to highlight these ==very important words==.
+
+
+Subscript
+This isn’t common, but some Markdown processors allow you to use subscript to position one or more characters slightly below the normal line of type. To create a subscript, use one tilde symbol (~) before and after the characters.
+
+H~2~O
