@@ -1,0 +1,22 @@
+---
+const pageTitle = "Home Page Astro props";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/global.css";
+const { props } = Astro.locals as { props: {content: string } }
+
+const posts = await Astro.glob('/pages/*.md');
+const Content = posts[0].Content
+const headings = posts[0].getHeadings()
+const fm = posts[0].frontmatter
+
+console.log(headings)
+---
+
+<BaseLayout pageTitle={pageTitle}>
+    
+    <h1>{fm.title}</h1>
+    <!-- <h2>hola slot que tal</h2> -->
+    <!-- {props?.content} -->
+    <!-- {posts[0].file.toString()} -->
+    <Content>
+</BaseLayout>
