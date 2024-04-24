@@ -1,0 +1,24 @@
+---
+import BaseLayout from 'src/layouts/BaseLayout.astro'
+import type { Locals } from 'src/middleware'
+const {currentPage, routes} = Astro.locals as Locals
+const { slug } = Astro.params;
+const page = routes.find((route) => route === slug);
+console.log({page})
+if (!page) return Astro.redirect("/home");
+---
+
+<BaseLayout pageTitle="asdfasdf">
+    {slug}
+    {routes?.map(route => <li><a href={"/" + route}>{route}</a></li> )}
+    
+    <!-- <h1>{fm.title}</h1> -->
+    <!-- <h2>hola slot que tal</h2> -->
+    <!-- {props?.content} -->
+    {}
+    <!-- {posts[0].file.toString()} -->
+        <span set:html={currentPage?.contentHtml}></span>
+        <!-- {folder['intro\\intro.md']?.content}
+        {folder['intro\\\intro.md']?.content} -->
+            
+</BaseLayout>

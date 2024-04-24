@@ -1,8 +1,7 @@
 // import type { MiddlewareResponseHandler } from "astro";
-import { defineMiddleware } from "astro/middleware";
-import fs from 'fs'
-import path from 'path'
-import {readConfigFile} from "./middleware-utils"
+import type { MarkdownHeading } from "@astrojs/markdown-remark"
+import { defineMiddleware } from "astro/middleware"
+import { Log, generateLocalsByConfig as generateLocals, readConfigFile } from "./middleware-utils"
 
 
 // const middleware = (context, next, a, b) => {
@@ -26,23 +25,58 @@ import {readConfigFile} from "./middleware-utils"
 //     next()
 // };
 
+export interface Locals {
+    currentPage: {
+        contentHtml: string,
+        contentRaw: string,
+        metadata: {
+            headings: MarkdownHeading[];
+            imagesPaths: Set<string>;
+            frontmatter: Record<string, any>;
+        }
+    },
+    routes: string[]
+}
+
 const middleware = defineMiddleware(async(context, next) => {
     const { input } = await readConfigFile()
-    const readDirResult = await fs.promises.readdir(input, {recursive: true, encoding: 'utf8'})
-    const folder = {}
-    for await (const item of readDirResult) {
-        if (item.endsWith('.md')) {
-            const content = await fs.promises.readFile(path.join(input, item))
-            folder[item] = {content: content.toString()}
+    // const readDirResult = await fs.promises.readdir(input, {recursive: true, encoding: 'utf8'})
+    // const readDirResult = await readPagesDir(input);
 
-        } else if(item.split('\\').length) {
-            // it is a folder
-        }
-    }
-    
-    // console.log(folder)
-    context.locals['folder'] = folder
-    console.log(folder)
+    // get current url
+    // const fileCompiled = await getFile('')
+    // console.log(context.request)
+    // const routes = await getRoutes();
+    // const a = await getFile(context.url.pathname)
+    // console.log({routes})
+    Log.writeLog('filecompiled','json', context)
+
+
+    context.locals = await generateLocals(context, input) || {}
+
+    // const locals: Locals = {
+    //     currentPage: {
+    //         contentHtml: '',
+    //         contentRaw: '',
+    //         metadata: null
+    //     },
+    //     routes: routes
+    // }
+
+
+
+    // const folder = {}
+    // for await (const item of readDirResult) {
+    //     if (item.endsWith('.md')) {
+    //         const content = await fs.promises.readFile(path.join(input, item))
+    //         folder[item] = {content: content.toString()}
+
+    //     } else if(item.split('\\').length) {
+    //         // it is a folder
+    //     }
+    // }
+    // context.locals = await getFile('');
+    // context.locals['routes'] = [];
     next()
 })
 

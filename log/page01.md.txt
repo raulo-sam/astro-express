@@ -43,8 +43,6 @@ export const onRequest = defineMiddleware((context, next) => {
 
 ### Block editor
 https://blocky-editor.dev
-### Block editor
-https://blocky-editor.dev
 
 ### yjs
 https://yjs.dev/

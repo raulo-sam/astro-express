@@ -8,9 +8,11 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "dev:ssr": "nodemon server-ssr.js"
   },
   "dependencies": {
+    "@astrojs/markdown-remark": "^5.1.0",
     "@astrojs/node": "^8.2.5",
     "astro": "^4.6.3",
     "express": "^4.19.2",
