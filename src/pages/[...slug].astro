@@ -1,24 +1,36 @@
 ---
 import BaseLayout from 'src/layouts/BaseLayout.astro'
-import type { Locals } from 'src/middleware'
-const {currentPage, routes} = Astro.locals as Locals
-const { slug } = Astro.params;
-const page = routes.find((route) => route === slug);
-console.log({page})
-if (!page) return Astro.redirect("/home");
+import { generateStaticPaths, getFile } from 'src/middleware/middleware-utils'
+export const prerender = true
+export async function getStaticPaths(e) {
+    return await generateStaticPaths()
+}
+const { slug } = Astro.params
+const { input } = Astro.props
+const file = await getFile(`${input}/${slug}.md`)
 ---
 
-<BaseLayout pageTitle="asdfasdf">
+<BaseLayout client:load pageTitle="">
     {slug}
-    {routes?.map(route => <li><a href={"/" + route}>{route}</a></li> )}
+    <!-- {routes?.map(route => <li><a href={"/" + route}>{route}</a></li> )} -->
     
     <!-- <h1>{fm.title}</h1> -->
     <!-- <h2>hola slot que tal</h2> -->
     <!-- {props?.content} -->
     {}
     <!-- {posts[0].file.toString()} -->
-        <span set:html={currentPage?.contentHtml}></span>
+        <span set:html={file.currentPage.contentHtml}></span>
         <!-- {folder['intro\\intro.md']?.content}
         {folder['intro\\\intro.md']?.content} -->
+
+
+    <button id="btn">button</button>
             
 </BaseLayout>
+
+<script>
+    const $btn = document.querySelector('#btn')
+    $btn.addEventListener('click',() => {
+        console.log('click desde astro')
+    })
+</script>

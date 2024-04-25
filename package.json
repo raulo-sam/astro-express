@@ -9,7 +9,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "dev:ssr": "nodemon server-ssr.js"
+    "dev:ssr": "nodemon server-ssr.js",
+    "dev:ssg": "nodemon server-ssg.js"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^5.1.0",

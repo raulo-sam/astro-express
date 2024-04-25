@@ -24,7 +24,7 @@ export const readConfigFile = (): Promise<rocdocConfig> =>   {
 }
 
 export async function getFile(url: string): Promise<Locals> {
-    console.log({urlGetfile: url})
+    // console.log({urlGetfile: url})
     const fileRaw = await fs.promises.readFile(url)
     const compiler = await M.createMarkdownProcessor({})
     const result = await compiler.render(fileRaw.toString(), {frontmatter: {title: 'test frontmatter injection'}})
@@ -92,6 +92,20 @@ function getLocalsByDefault(): Locals {
         },
         routes: ['/error']
     }
+}
+
+
+export async function generateStaticPaths() {
+    const {input} = await readConfigFile()
+    let pages: {params: {slug: string}, props: {input}}[] = []
+    let routes = []
+    routes = await fs.promises.readdir(input, {recursive: true})
+    routes = routes.filter(item => item.endsWith('.md')).map(item=> item.replace('.md','').replace(/\\/g, '/')) || []
+    pages = routes.map(route => ({
+        params: {slug: route},
+        props: {input}
+    }))
+    return Promise.resolve(pages);
 }
 
 

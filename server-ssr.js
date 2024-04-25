@@ -17,11 +17,7 @@ app.get('/get', (req, res) => {
         test: 'test'
     })
 })
-// app.use(express.static('dist/client/'));
-
-
-
-
+app.use(express.static('dist/client/'));
 
 app.use( async (req, res, next) => {
     console.log(req.url)
