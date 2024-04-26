@@ -2,15 +2,16 @@
 import BaseLayout from 'src/layouts/BaseLayout.astro'
 import { generateStaticPaths, getFile } from 'src/middleware/middleware-utils'
 export const prerender = true
-export async function getStaticPaths(e) {
+export async function getStaticPaths() {
     return await generateStaticPaths()
 }
 const { slug } = Astro.params
 const { input } = Astro.props
+console.log({path: `${input}/${slug}.md` })
 const file = await getFile(`${input}/${slug}.md`)
 ---
 
-<BaseLayout client:load pageTitle="">
+<BaseLayout pageTitle="aasdf">
     {slug}
     <!-- {routes?.map(route => <li><a href={"/" + route}>{route}</a></li> )} -->
     

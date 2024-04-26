@@ -27,6 +27,7 @@ export async function getFile(url: string): Promise<Locals> {
     // console.log({urlGetfile: url})
     const fileRaw = await fs.promises.readFile(url)
     const compiler = await M.createMarkdownProcessor({})
+    console.log(fileRaw)
     const result = await compiler.render(fileRaw.toString(), {frontmatter: {title: 'test frontmatter injection'}})
     return Promise.resolve({
         currentPage: {

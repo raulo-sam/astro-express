@@ -10,14 +10,18 @@
     "preview": "astro preview",
     "astro": "astro",
     "dev:ssr": "nodemon server-ssr.js",
-    "dev:ssg": "nodemon server-ssg.js"
+    "dev:ssg": "nodemon server-ssg.js",
+    "dev:entry": "nodemon ./dist/server/entry.mjs"
+
   },
   "dependencies": {
+    "@astrojs/check": "^0.5.10",
     "@astrojs/markdown-remark": "^5.1.0",
     "@astrojs/node": "^8.2.5",
     "astro": "^4.6.3",
     "express": "^4.19.2",
-    "node-yaml": "^4.0.1"
+    "node-yaml": "^4.0.1",
+    "typescript": "^5.4.5"
   },
   "devDependencies": {
     "@types/express": "^4.17.21"
