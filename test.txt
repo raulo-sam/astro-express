@@ -1,7 +1,5 @@
 
-el servidor express server-ssr.js apunta al dist/server, este tiene habilitado un middleware
-que lee el archivo de configuracion y el contenido de los pages
 
-1. mirar astrojs/compiler
+1. añadir alguna pagina a traves de un fichero markdown y tratar de renderizarla con el prerender
 
 

@@ -21,13 +21,13 @@ async function createServer() {
     const { pathname } = new URL(`${req.protocol}://${req.get('host')}${req.originalUrl}`)
     try {
       const indexTemplate = await fs.promises.readFile(resolve(dir, 'index.html'), {encoding: 'utf-8'})
-      const config = await readConfigFile()
-      console.log(config)
+      // const config = await readConfigFile()
+      // console.log(config)
       console.log({indexTemplate})
       const indexTemplateTransformed = await vite.transformIndexHtml(pathname, indexTemplate)
       console.log({indexTemplateTransformed})
-      const { Renderer } = await vite.ssrLoadModule('/src/entry-server.tsx')
-      const rendererInstance = new Renderer(indexTemplateTransformed, config)
+      const { Renderer } = await vite.ssrLoadModule('/src/entry-server.jsx')
+      const rendererInstance = new Renderer(indexTemplateTransformed)
       const { status, type, body } = rendererInstance.render(pathname)
       res.status(status).set({'Content-Type': type}).end(body)
     } catch (e) {

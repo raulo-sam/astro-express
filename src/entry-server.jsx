@@ -2,8 +2,6 @@ import javascriptLogo from './javascript.svg'
 import ReactDOMServer from 'react-dom/server'
 import TitleComponent from './title'
 import React from "react"
-import type { rocdocConfig } from './middleware/middleware-utils'
-
 
 // export function render() {
 //   const html = `
@@ -32,8 +30,9 @@ export class Renderer {
   // feeds = null
   transformedTemplate = null
 
-  constructor(transformedTemplate, private config: rocdocConfig) {
+  constructor(transformedTemplate) {
     this.pages = gatherPages()
+    console.log({pages: this.pages})
     // this.feeds = gatherFeeds()
     this.transformedTemplate = transformedTemplate
   }
@@ -79,20 +78,37 @@ export class Renderer {
 }
 
 function gatherPages() {
-  const modules = import.meta.glob('./pages/**/*.{jsx,mdx,md}')
-  console.log({modules})
-  return Object.entries(modules).reduce((pages, [modulePath, page]) => {
-    const filePath = modulePath.replace(/^\.\/pages/, '').replace(/(\.jsx|\.mdx)$/, '')
-    const urlPath = filePath.endsWith('/index') ? filePath.replace(/index$/, '') : `${filePath}/`
-    console.log({modulePath, page})
-    pages[urlPath] = {
-      Component: page.default,
-      meta: page.meta,
-      tableOfContents: page.tableOfContents,
-      filePath,
-      modulePath,
-      urlPath
-    }
-    return pages
-  }, {})
+
+  return [{
+    body: `<h1> hola prerender </h1>` ,
+    filePath: '/test/pepito'
+  }]
+  // const modules = import.meta.glob('./pages/**/*.md')
+  // console.log({modules})
+  // // Object.entries(modules).forEach(async (m) => {
+  // //   console.log(m)
+  // // })
+  
+  // for (const item in modules) {
+  //   const m = modules[item]
+  //   console.log({m: m()})
+  // }
+
+
+
+
+  // return Object.entries(modules).reduce((pages, [modulePath, page]) => {
+  //   const filePath = modulePath.replace(/^\.\/pages/, '').replace(/(\.jsx|\.mdx)$/, '')
+  //   const urlPath = filePath.endsWith('/index') ? filePath.replace(/index$/, '') : `${filePath}/`
+  //   console.log({modulePath, page: page})
+  //   pages[urlPath] = {
+  //     Component: page.default,
+  //     meta: page.meta,
+  //     tableOfContents: page.tableOfContents,
+  //     filePath,
+  //     modulePath,
+  //     urlPath
+  //   }
+  //   return pages
+  // }, {})
 }

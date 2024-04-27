@@ -1,12 +1,10 @@
 export const meta = {
   title: '404 Not Found'
 }
+export const hola = 'hola'
 
-import { useFela } from 'react-fela'
-
-export default function NotFoundPage ({ meta, pages }) {
-  const { css } = useFela()
+export default function NotFoundPage () {
   return (
-    <p className={css({ color: 'orange' })}>Not Found</p>
+    <p>Not Found</p>
   )
 }

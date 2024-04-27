@@ -4,9 +4,13 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev:ssr": "nodemon server-ssr.js",
+    "dev": "node server-ssr.js",
     "dev:ssg": "nodemon server-ssg.js",
-    "dev:entry": "nodemon ./dist/server/entry.mjs"
+    "dev:entry": "nodemon ./dist/server/entry.mjs",
+    "build:client": "vite --config vite.config.client.js build --outDir dist/client",
+    "build:server": "vite --config vite.config.server.js build --outDir dist/server --ssr src/entry-server.jsx",
+    "build": "npm run build:client && npm run build:server && node prerender"
+
   },
   "dependencies": {
     "@astrojs/check": "^0.5.10",

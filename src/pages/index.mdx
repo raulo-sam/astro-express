@@ -21,33 +21,3 @@ This is your homepage. Pages live in `src/pages` and are either `.mdx` files (li
 
 ## Metadata
 
-Pages can have tags, dates, and all kinds of other metadata. That lets you do stuff like render a date-ordered list of all pages with the 'post' tag:
-
-import { pagesWithTag } from '../utils'
-import dayjs from 'dayjs'
-
-<ul>
-  {pagesWithTag(props.pages, 'post').map(({ meta, urlPath }) => (
-    <li key={urlPath}>
-      <a href={urlPath}>{meta.title}</a>{' '}
-      <small>written on {dayjs(meta.date).format('dddd in MMMM ’YY')}</small>
-    </li>
-  ))}
-</ul>
-
-## Islands & client-side JS
-
-Tropical pages are **only server rendered by default.** To progressively enhance you'll need to sprinkle on some client-side JS, or opt components into hydration with Tropical Islands.
-
-import { Island } from 'tropical-islands'
-import { ExampleComponent } from '../components/ExampleComponent'
-
-<Island componentName='ExampleComponent' islandTag='span'>
-  <ExampleComponent alertMessage='😎'>Hydrated</ExampleComponent>
-</Island>
-
-<ExampleComponent alertMessage='😢'>Not hydrated</ExampleComponent>
-
-## And much more!
-
-Check out [the docs](https://tropical.js.org) or dive in and explore the `src` directory.
