@@ -1,11 +1,13 @@
 {
-  // "include": [
-  //   "./src/**/*.ts",
-  //   "./src/**/*.d.ts",
-  //   "./src/**/*.astro",
-  // ],
-  // "exclude": ["node_modules", "build"],
+  "include": [
+    "./src/**/*.ts",
+    "./src/**/*.d.ts",
+    "./src/**/*.astro",
+  ],
+  "exclude": ["node_modules", "build"],
   "compilerOptions": {
+    "target": "es2015",
+    "moduleResolution": "node",
     "types": ["node", "express"],
     "noImplicitAny": false,
     "esModuleInterop": true,

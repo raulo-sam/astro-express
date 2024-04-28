@@ -3,10 +3,11 @@ import fse from 'fs-extra'
 import path, {dirname} from 'path'
 import { fileURLToPath } from 'url'
 const app = express()
-const dir = dirname(fileURLToPath(import.meta.url))
+// const dir = dirname(fileURLToPath(import.meta.url))
 app.use(express.static('dist/client'));
 app.use((req, res) => {
-    const i = path.join(dir, 'dist/client/' + req.path + '.html')
+    const i = path.join('..', 'dist/client/' + req.path + '.html')
+    console.log(i)
     if(fse.pathExistsSync(i)) {
         console.log({i})
         res.sendFile(i)

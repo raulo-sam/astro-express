@@ -7,19 +7,20 @@
     "dev": "node server-ssr.js",
     "dev:ssg": "nodemon server-ssg.js",
     "dev:entry": "nodemon ./dist/server/entry.mjs",
-    "build:client": "vite --config vite.config.client.js build --outDir dist/client",
-    "build:server": "vite --config vite.config.server.js build --outDir dist/server --ssr src/entry-server.jsx",
-    "build": "npm run build:client && npm run build:server && node prerender"
+    "build:client": "vite --config vite.config.client.js build",
+    "build:server": "vite --config vite.config.server.js build --ssr src/entry-server.jsx",
+    "build": "npm run build:client && npm run build:server && node server/prerender",
+    "build:esbuild": "esbuild server/server-ssr.js --format=cjs --bundle --platform=node --outfile=server-ssr-dist.js --external:lightningcss --external:esbuild"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^5.1.0",
+    "@originjs/vite-plugin-require-context": "^1.0.9",
     "@vitejs/plugin-react": "^4.2.1",
     "express": "^4.19.2",
     "fs-extra": "^11.2.0",
     "node-yaml": "^4.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "rollup": "^4.17.0",
     "rxjs": "^7.8.1",
     "typescript": "^5.4.5",
     "vite": "^5.2.10",
@@ -27,9 +28,7 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
+    "@types/fs-extra": "^11.0.4",
     "@types/react-dom": "^18.3.0"
-  },
-  "engines": {
-    "node": ">=16"
   }
 }

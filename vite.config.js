@@ -24,7 +24,10 @@ export const build = {
   assetsInlineLimit: 0
 }
 export default defineConfig({
-  logLevel: 'info',
+  // logLevel: 'info',
+    define: {
+      'process.env.NODE_ENV': JSON.stringify('production'),
+    },
   plugins,
   build
 })
