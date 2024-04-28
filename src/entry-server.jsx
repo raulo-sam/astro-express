@@ -19,6 +19,9 @@ export class Renderer {
     return this.renderPage(pathname)
   }
 
+  redirect(pathname) {
+    
+  }
 
   renderPage(pathname) {
     console.log({pathname})

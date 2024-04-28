@@ -1,5 +1,4 @@
 
 
-1. añadir alguna pagina a traves de un fichero markdown y tratar de renderizarla con el prerender
 
 

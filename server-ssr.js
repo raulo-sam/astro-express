@@ -10,8 +10,8 @@ export let pages
 let indexTemplate
 let config
 
-
 const dir = dirname(fileURLToPath(import.meta.url))
+const isProduction = process.env.NODE
 const port = process.env.PORT || 8000
 const base = process.env.BASE || '/'
 async function createServer() {
@@ -24,9 +24,11 @@ async function createServer() {
     }
   })
   app.use(vite.middlewares)
+  
+  app.use(express.static(path.join(dir, 'public')));
   app.use('*', async (req, res) => {
     // const { pathname } = new URL(`${req.protocol}://${req.get('host')}${req.originalUrl}`)
-    const pathName = req.originalUrl.replace('/','')
+    let pathName = req.originalUrl.replace('/','')
     try {
       if(!indexTemplate) {
         indexTemplate = await fs.promises.readFile(resolve(dir, 'index.html'), {encoding: 'utf-8'})
@@ -40,14 +42,20 @@ async function createServer() {
         pages = await getPagesAsync(config)
       }
       const rendererInstance = new Renderer(indexTemplateTransformed, pages)
-      console.log({pages})
-      console.log(pathName)
-      if(pages[pathName]) {
-        const { status, type, body } = rendererInstance.render(pathName)
-        res.status(status).set({'Content-Type': type}).end(body)
-        return
+      // if(pages[pathName]) {
+      // } else {
+      //   console.log({pathName})
+      // }
+      
+      if(!pages[pathName]) {
+        console.log(req.originalUrl)
+        console.log(pages['index'])
+        res.redirect(pages['index']?.routePath || '/404')
+        return;
       }
-      res.status(200).send()
+      const { status, type, body } = rendererInstance.render(pathName)
+      res.status(status).set({'Content-Type': type}).end(body)
+      // res.status(200).send()
     } catch (e) {
       vite.ssrFixStacktrace(e)
       console.error(e)
@@ -108,6 +116,7 @@ function setPage(path) {
       const normalizePath = path.replace('.md','').split(sep).join('/')
       res({
         [normalizePath]: {
+          routePath: normalizePath,
           filePath: path.split(sep).join('/'),
           contentHtml: result.code,
           contentRaw: fileRaw.toString(),

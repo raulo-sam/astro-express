@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+// import { ssr } from 'vite-plugin-ssr/plugin'
 // import mdx from '@mdx-js/rollup'
 // import rehypeSlug from 'rehype-slug'
 // import rehypeExtractToc from '@stefanprobst/rehype-extract-toc'
@@ -10,6 +11,7 @@ import react from '@vitejs/plugin-react'
 
 export const plugins = [
   react(),
+  // ssr({ prerender: true })
 //   mdx({
 //     rehypePlugins: [rehypeSlug, rehypeExtractToc, rehypeExtractTocMdx],
 //     remarkPlugins: [remarkGfm],
