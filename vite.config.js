@@ -21,4 +21,8 @@ export const plugins = [
 export const build = {
   assetsInlineLimit: 0
 }
-export default defineConfig({ plugins, build })
+export default defineConfig({
+  logLevel: 'info',
+  plugins,
+  build
+})
